@@ -14,6 +14,7 @@ defmodule Api.Application do
       # Start a worker by calling: Api.Worker.start_link(arg)
       # {Api.Worker, arg},
       # Start to serve requests, typically the last entry
+      ApiWeb.CassandraConnection,
       ApiWeb.Endpoint
     ]
 
