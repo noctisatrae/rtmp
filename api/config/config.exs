@@ -33,5 +33,7 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
 
-config :api, ApiWeb.CassandraConnection,
-  nodes: ["127.0.0.1:9402"]
+config :api, :xandra,
+  nodes: ["127.0.0.1:9042"],
+  name: :xandra_conn,
+  keyspace: "streaming_app"

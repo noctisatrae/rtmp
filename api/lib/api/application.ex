@@ -7,6 +7,8 @@ defmodule Api.Application do
 
   @impl true
   def start(_type, _args) do
+    xandra_config = Application.fetch_env!(:api, :xandra)
+
     children = [
       ApiWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:api, :dns_cluster_query) || :ignore},
@@ -14,7 +16,7 @@ defmodule Api.Application do
       # Start a worker by calling: Api.Worker.start_link(arg)
       # {Api.Worker, arg},
       # Start to serve requests, typically the last entry
-      ApiWeb.CassandraConnection,
+      {Xandra, xandra_config},
       ApiWeb.Endpoint
     ]
 
