@@ -5,12 +5,12 @@ services:
     build: .
     ports:
       - "1935:1935"
-  chat:
-    container_name: db
-    restart: always
-    image: postgres
+  scylla:
+    image: scylladb/scylla
+    command:
+      - --smp=1
+      - --listen-address=0.0.0.0
+      - --broadcast-rpc-address=127.0.0.1
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=dev
-      - POSTGRES_DB=api_dev
+      - "127.0.0.1:9042:9042"
+    restart: unless-stopped

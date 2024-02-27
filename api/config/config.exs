@@ -34,6 +34,4 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :api, ApiWeb.CassandraConnection,
-  nodes: ["127.0.0.1:9042"],
-  username: "cassandra",
-  password: "dev"
+  nodes: ["127.0.0.1:9402"]

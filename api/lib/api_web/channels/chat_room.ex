@@ -1,6 +1,8 @@
 defmodule ApiWeb.RoomChannel do
   use Phoenix.Channel
 
+  require Logger
+
   def join("room:chat", _message, socket) do
     {:ok, socket}
   end
