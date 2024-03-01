@@ -27,3 +27,10 @@ CREATE TABLE channel (
   edited_at timestamp,
   PRIMARY KEY ((author_id), channel_id)
 ) WITH CLUSTERING ORDER BY (channel_id DESC);
+
+CREATE TABLE IF NOT EXISTS banned_authors (
+ channel_id bigint,
+ author_id bigint,
+ banned_at timestamp,
+ PRIMARY KEY (channel_id, author_id)
+) WITH CLUSTERING ORDER BY (author_id ASC);

@@ -40,7 +40,8 @@ defmodule Api.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:decimal, "~> 2.0"},
-      {:xandra, "~> 0.18.1"}
+      {:xandra, "~> 0.18.1"},
+      {:snowflake, "~> 1.0.0"},
     ]
   end
 

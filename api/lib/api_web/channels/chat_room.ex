@@ -3,12 +3,12 @@ defmodule ApiWeb.RoomChannel do
 
   require Logger
 
-  def join("room:" <> room_id, _params, socket) do
+  def join("room:" <> _room_id, _params, socket) do
     {:ok, socket}
   end
 
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast!(socket, "new_msg", %{body: body})
+  def handle_in("new_msg", %{"content" => content, "author_id" => author_id, "username" => username, "created_at" => created_at}, socket) do
+    broadcast!(socket, "new_msg", %{content: content, author_id: author_id, username: username, created_at: created_at})
     {:noreply, socket}
   end
 end
