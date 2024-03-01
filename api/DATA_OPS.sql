@@ -4,6 +4,3 @@ VALUES ('Hector', 'hashed_password', 12345, 'hector@example.com', toTimestamp(no
 CREATE INDEX ON author (username);
 
 SELECT author_id FROM author WHERE username = 'Hector';
-
-------------------------------------
-
