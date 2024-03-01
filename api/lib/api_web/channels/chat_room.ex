@@ -8,9 +8,10 @@ defmodule ApiWeb.RoomChannel do
   end
 
   def handle_in("new_msg", %{"content" => content, "author_id" => author_id, "username" => username, "channel_id" => channel_id}, socket) do
-    broadcast!(socket, "new_msg", %{content: content, author_id: author_id, username: username})
-
     {:ok, msg_id} = Snowflake.next_id()
+
+    broadcast!(socket, "new_msg", %{content: content, author_id: author_id, username: username, msg_id: msg_id})
+
     query = "INSERT INTO messages (
       channel_id,
       message_id,

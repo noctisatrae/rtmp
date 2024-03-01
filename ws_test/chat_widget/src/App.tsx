@@ -1,33 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import { Socket } from "phoenix-socket";
+
 import './App.css'
 
+const socket = new Socket("ws://localhost:4000/socket")
+
+const dummy_msg = {
+  content: "",
+  author_id: 9034905903950,
+  created_at: 5285908359,
+  username: "noctis_atrae",
+  channel_id: 12643
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [msgInput, setMsgInput] = useState<string>("");
+  const [msgList, setMsgList] = useState<any>([]);
+  const [channel, _setChannel] = useState<any>(socket.channel("room:ewen", {}));
+
+  /* functions definitions */
+  const sendMsg = (content: string) => {
+    console.log(`[${Date.now()}] - Pushing message...`)
+    dummy_msg.content = content;
+    channel.push("new_msg", dummy_msg)
+  }
+
+  /* useEffect hooks */
+  useEffect(() => {
+    socket.connect()
+    channel.join()
+      .receive("ok", (resp: any) => { console.log("Joined successfully!", resp) })
+      .receive("error", (resp: any) => { console.log("Unable to join", resp) });    
+  }, [])
+
+  useEffect(() => {
+    channel.on('new_msg', (msg: any) => {
+      setMsgList([...msgList, msg])
+    })
+  }, [msgList])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        {msgList.map((msg:any) => <li key={msg.msg_id}>{msg.content}</li>)}
+        <input 
+          className="msg-input" 
+          content={msgInput} 
+          placeholder='Type your message' 
+          onChange={(e) => setMsgInput(e.target.value)}></input>
+        <button onClick={() => sendMsg(msgInput)}>Send</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
