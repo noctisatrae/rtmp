@@ -1,3 +1,5 @@
 deps
 node_modules
 .elixir-ls
+bundle_bun.js
+bundle.js
