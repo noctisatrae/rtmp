@@ -3,12 +3,8 @@ defmodule ApiWeb.RoomChannel do
 
   require Logger
 
-  def join("room:chat", _message, socket) do
+  def join("room:" <> room_id, _params, socket) do
     {:ok, socket}
-  end
-
-  def join("room:" <> _private_room_id, _params, _socket) do
-    {:error, %{reason: "unauthorized"}}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
