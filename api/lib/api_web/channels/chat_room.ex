@@ -8,18 +8,19 @@ defmodule ApiWeb.RoomChannel do
   end
 
   def handle_in("new_msg", %{"content" => content, "author_id" => author_id, "username" => username, "channel_id" => channel_id}, socket) do
-    {:ok, msg_id} = Snowflake.next_id()
+    {:ok, message_id} = Snowflake.next_id()
 
-    broadcast!(socket, "new_msg", %{content: content, author_id: author_id, username: username, msg_id: msg_id})
+    broadcast!(socket, "new_msg", %{content: content, author_id: author_id, username: username, message_id: message_id})
 
     query = "INSERT INTO messages (
       channel_id,
       message_id,
       author_id,
+      username,
       content,
       created_at,
-      updated_at_at) VALUES (?, ?, ?, ?, toTimestamp(now()), toTimestamp(now()));"
-    params = [{"bigint", channel_id}, {"bigint", msg_id}, {"bigint", author_id}, {"text", content}]
+      updated_at) VALUES (?, ?, ?, ?, ?, toTimestamp(now()), toTimestamp(now()));"
+    params = [{"bigint", channel_id}, {"bigint", message_id}, {"bigint", author_id}, {"text", username}, {"text", content}]
 
     Xandra.execute!(:xandra_conn, query, params)
 

@@ -2,9 +2,10 @@ CREATE TABLE messages (
   channel_id bigint,
   message_id bigint,
   author_id bigint,
+  username text,
   content text,
   created_at timestamp,
-  updated_at_at timestamp,
+  updated_at timestamp,
   PRIMARY KEY ((channel_id), message_id)
 ) WITH CLUSTERING ORDER BY (message_id DESC);
 
