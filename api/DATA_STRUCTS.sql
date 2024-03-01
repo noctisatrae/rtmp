@@ -10,7 +10,7 @@ CREATE TABLE messages (
 
 CREATE TABLE author (
   username text,
-  password_hash: text,
+  password_hash text,
   author_id bigint,
   email text,
   created_at timestamp,
@@ -18,7 +18,7 @@ CREATE TABLE author (
   PRIMARY KEY ((author_id), updated_at)  
 ) WITH CLUSTERING ORDER BY (updated_at DESC);
 
-CREATE TABLE channel {
+CREATE TABLE channel (
   author_id bigint,
   channel_id bigint,
   channel_name text,
@@ -26,4 +26,4 @@ CREATE TABLE channel {
   created_at timestamp,
   edited_at timestamp,
   PRIMARY KEY ((author_id), channel_id)
-} WITH CLUSTERING ORDER BY (channel_id DESC);
+) WITH CLUSTERING ORDER BY (channel_id DESC);
