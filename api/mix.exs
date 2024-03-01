@@ -39,9 +39,10 @@ defmodule Api.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
-      {:decimal, "~> 2.0"},
-      {:xandra, "~> 0.18.1"},
-      {:snowflake, "~> 1.0.0"},
+      {:decimal, "~> 2.0"}, # Required to compile ScyllaDB
+      {:xandra, "~> 0.18.1"}, # ScyllaDB API for Elixir
+      {:snowflake, "~> 1.0.0"}, # Snowflake IDs generator
+      {:bcrypt_elixir, "~> 3.0"} # PASSWD Hashing
     ]
   end
 

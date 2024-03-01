@@ -17,9 +17,10 @@ type Message = {
 
 let dummy_msg = {
   content: "Hello world!",
-  author_id: "9034905903950",
-  created_at: "5285908359",
-  username: "noctis_atrae"
+  author_id: 9034905903950,
+  created_at: 5285908359,
+  username: "noctis_atrae",
+  channel_id: 12643
 } 
 
 channel.push("new_msg", dummy_msg)
