@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Socket } from "phoenix-socket";
 
-import '../App.css'
-import { Message as MessageType } from '../typdefs';
-import Message from '../components/Message';
+import './App.css'
+import { Message as MessageType } from './typdefs';
+import Message from './components/Message';
 
 const socket = new Socket("ws://localhost:4000/socket")
 
@@ -15,7 +15,7 @@ const dummy_msg = {
   channel_id: 12643
 }
 
-const Chat = () => {
+const App = () => {
   /* scroll-to-bottom-ref */
   const bottomRef = useRef<any>(null);
 
@@ -75,4 +75,4 @@ const Chat = () => {
   )
 }
 
-export default Chat;
+export default App;
