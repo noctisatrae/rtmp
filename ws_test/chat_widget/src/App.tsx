@@ -7,11 +7,19 @@ import Message from './components/Message';
 
 const socket = new Socket("ws://localhost:4000/socket")
 
+type Message = {
+  content: string,
+  author_id: number,
+  created_at: number,
+  username: string,
+  channel_id: number
+}
+
 const dummy_msg = {
   content: "",
   author_id: 9034905903950,
   created_at: 5285908359,
-  username: "noctis_atrae",
+  username: "Viewer",
   channel_id: 12643
 }
 
