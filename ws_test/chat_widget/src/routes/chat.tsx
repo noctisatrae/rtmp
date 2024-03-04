@@ -63,11 +63,11 @@ const Chat = () => {
       {inputOpt ?
       <>
       <input 
-            className="msg-input" 
+            className="msg-input text-white" 
             content={msgInput} 
             placeholder='Type your message' 
             onChange={(e) => setMsgInput(e.target.value)} 
-            onKeyDown={(e) => (e.key === "Enter" ? sendMsg(msgInput) : {})}></input> <button onClick={() => sendMsg(msgInput)}>Send</button>
+            onKeyDown={(e) => (e.key === "Enter" ? sendMsg(msgInput) : {})}></input> <button className='send-button' onClick={() => sendMsg(msgInput)}>Send</button>
       </>
       : <></>
       }
