@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "1935:1935"
+      - "8080:8080"
   scylla:
     image: scylladb/scylla
     command:
