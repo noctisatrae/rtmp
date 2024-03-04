@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Socket } from "phoenix-socket";
 
-import './App.css'
-import { Message as MessageType } from './typdefs';
-import Message from './components/Message';
+import '../App.css'
+import { Message as MessageType } from '../typdefs';
+import Message from '../components/Message';
 
 const socket = new Socket("ws://localhost:4000/socket")
 
@@ -15,7 +15,7 @@ const dummy_msg = {
   channel_id: 12643
 }
 
-function App() {
+const Chat = () => {
   /* scroll-to-bottom-ref */
   const bottomRef = useRef<any>(null);
 
@@ -66,7 +66,8 @@ function App() {
             className="msg-input" 
             content={msgInput} 
             placeholder='Type your message' 
-            onChange={(e) => setMsgInput(e.target.value)} onKeyDown={(e) => (e.key === "Enter" ? sendMsg(msgInput) : {})}></input> <button onClick={() => sendMsg(msgInput)}>Send</button>
+            onChange={(e) => setMsgInput(e.target.value)} 
+            onKeyDown={(e) => (e.key === "Enter" ? sendMsg(msgInput) : {})}></input> <button onClick={() => sendMsg(msgInput)}>Send</button>
       </>
       : <></>
       }
@@ -74,4 +75,4 @@ function App() {
   )
 }
 
-export default App
+export default Chat;
