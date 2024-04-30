@@ -1,17 +1,34 @@
 defmodule ApiV2.Router do
+  require Logger
   use Plug.Router
 
   plug Plug.Logger
   plug :match
   plug :dispatch
 
-  get "/" do
-    send_resp(conn, 200, """
-    Use the JavaScript console to interact using websockets
+  plug ApiV2.Plug
 
-    sock  = new WebSocket("ws://localhost:4000/websocket")
-    sock.addEventListener("message", console.log)
-    sock.addEventListener("open", () => sock.send("ping"))
-    """)
+  get "/chat" do
+    conn = fetch_query_params(conn)
+    id = case Map.fetch(conn.query_params, "id") do
+      {:ok, value} -> value
+      :error -> nil
+    end
+
+    if id == :null do
+      conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(400, Jason.encode!(%{code: 404, message: "Missing the id in query!"}))
+    end
+
+    conn
+      |> put_resp_content_type("application/json")
+      |> send_resp(400, Jason.encode!(%{code: 404, message: "Missing the id in query!"}))
+  end
+
+  match _ do
+    conn
+      |> put_resp_content_type("application/json")
+      |> send_resp(404, Jason.encode!(%{code: 404, message: "Route not found."}))
   end
 end
