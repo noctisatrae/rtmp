@@ -10,8 +10,7 @@ defmodule ApiV2.Router do
   plug ApiV2.Plug
 
   get "/chat" do
-    conn
-      |> WebSockAdapter.upgrade(ApiV2.WebSock, [], [])
+    WebSockAdapter.upgrade(conn, ApiV2.WebSock, [conn], [])
   end
 
   match _ do

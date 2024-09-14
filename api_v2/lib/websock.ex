@@ -2,6 +2,8 @@ defmodule ApiV2.WebSock do
   require Logger
 
   def init(options) do
+    ## here we can add this connection to a shared (immediate) DB of connection to create a channel
+    Logger.info(inspect(options))
     {:ok, options}
   end
 
